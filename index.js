@@ -6,6 +6,7 @@ const Task = require("./models/tasks");
 const app = express();
 const PORT = process.env.PORT || 3000;
 mongoose.set("strictQuery", false);
+
 const connectDB = async () => {
   try {
     const conn = await mongoose.connect(process.env.MONGO_URI, {
@@ -19,15 +20,14 @@ const connectDB = async () => {
   }
 };
 
-app.get("/", (req, res) => {
-  // show all tasks in the database
-  Task.find({}, (err, tasks) => {
-    if (err) {
-      console.log(err);
-    } else {
-      res.send(tasks);
-    }
-  });
+app.get("/", async (req, res) => {
+  try {
+    const tasks = await Task.find({});
+    res.send(tasks);
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send("Server Error");
+  }
 });
 
 connectDB().then(() => {
