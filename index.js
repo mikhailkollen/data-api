@@ -20,10 +20,23 @@ const connectDB = async () => {
   }
 };
 
+app.use(express.json()); // This line is necessary to parse JSON data from POST requests
+
 app.get("/", async (req, res) => {
   try {
     const tasks = await Task.find({});
     res.send(tasks);
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send("Server Error");
+  }
+});
+
+app.post("/", async (req, res) => {
+  try {
+    const newTask = new Task(req.body);
+    await newTask.save();
+    res.send(newTask);
   } catch (err) {
     console.error(err.message);
     res.status(500).send("Server Error");
