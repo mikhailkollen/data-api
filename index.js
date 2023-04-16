@@ -25,6 +25,10 @@ app.use(express.json());
 app.get("/", async (req, res) => {
   try {
     const tasks = await Task.find({});
+    res.setHeader(
+      "Access-Control-Allow-Origin",
+      "https://mikhailkollen.github.io"
+    );
     res.send(tasks);
   } catch (err) {
     console.error(err.message);
