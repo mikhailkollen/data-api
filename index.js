@@ -37,6 +37,7 @@ app.post("/", async (req, res) => {
   try {
     const newTask = new Task(req.body);
     await newTask.save();
+    console.log(newTask);
     res.send(newTask);
   } catch (err) {
     console.error(err.message);
