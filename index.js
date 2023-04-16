@@ -59,6 +59,22 @@ app.delete("/:id", async (req, res) => {
   }
 });
 
+app.put("/:id", async (req, res) => {
+  try {
+    const { id } = req.params;
+    const updatedTask = await Task.findByIdAndUpdate(id, req.body, {
+      new: true,
+    });
+    if (!updatedTask) {
+      return res.status(404).send("Task not found");
+    }
+    res.send(updatedTask);
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send("Server Error");
+  }
+});
+
 connectDB().then(() => {
   app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`);
