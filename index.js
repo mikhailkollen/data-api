@@ -1,6 +1,6 @@
-require("dotenv").config();
 const express = require("express");
 const mongoose = require("mongoose");
+const cors = require("cors");
 const Task = require("./models/tasks");
 
 const app = express();
@@ -21,14 +21,11 @@ const connectDB = async () => {
 };
 
 app.use(express.json());
+app.use(cors({ origin: "https://mikhailkollen.github.io" }));
 
 app.get("/", async (req, res) => {
   try {
     const tasks = await Task.find({});
-    res.setHeader(
-      "Access-Control-Allow-Origin",
-      "https://mikhailkollen.github.io"
-    );
     res.send(tasks);
   } catch (err) {
     console.error(err.message);
