@@ -16,7 +16,7 @@ const TaskSchema = new Schema({
   },
   date: {
     type: String,
-    default: Date.now,
+    default: "2023-04-16T00:00:00.000Z",
   },
 });
 
