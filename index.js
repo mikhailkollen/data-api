@@ -20,29 +20,14 @@ const connectDB = async () => {
 };
 
 app.get("/", (req, res) => {
-  res.send({ title: "Books" });
-});
-
-app.get("/tasks", async (req, res) => {
-  try {
-    const books = await Task.insertMany([
-      {
-        title: "Task 1",
-        isCompleted: false,
-        tag: "other",
-        date: Date.now(),
-      },
-      {
-        title: "Task 2",
-        isCompleted: false,
-        tag: "other",
-        date: Date.now(),
-      },
-    ]);
-    res.send(books);
-  } catch (err) {
-    console.error(err.message);
-  }
+  // show all tasks in the database
+  Task.find({}, (err, tasks) => {
+    if (err) {
+      console.log(err);
+    } else {
+      res.send(tasks);
+    }
+  });
 });
 
 connectDB().then(() => {
