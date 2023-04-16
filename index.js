@@ -1,68 +1,52 @@
+require("dotenv").config();
 const express = require("express");
-const { Sequelize, DataTypes } = require("sequelize");
-
-const sequelize = new Sequelize(process.env.DATABASE_URL, {
-  dialect: "postgres",
-  dialectOptions: {
-    ssl: {
-      require: true,
-      rejectUnauthorized: false,
-    },
-  },
-});
-
-const Tasks = sequelize.define("task", {
-  id: {
-    type: DataTypes.STRING,
-    allowNull: false,
-    primaryKey: true,
-  },
-  title: {
-    type: DataTypes.STRING,
-    allowNull: false,
-  },
-  isCompleted: {
-    type: DataTypes.BOOLEAN,
-    allowNull: false,
-  },
-  tag: {
-    type: DataTypes.STRING,
-    allowNull: false,
-  },
-  date: {
-    type: DataTypes.STRING,
-    allowNull: false,
-  },
-});
+const mongoose = require("mongoose");
+const Task = require("./models/tasks");
 
 const app = express();
-app.use(express.json());
+const PORT = process.env.PORT || 3000;
+mongoose.set("strictQuery", false);
+const connectDB = async () => {
+  try {
+    const conn = await mongoose.connect(process.env.MONGO_URI, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+    });
+    console.log(`MongoDB connected ${conn.connection.host}`);
+  } catch (err) {
+    console.error(err.message);
+    process.exit(1);
+  }
+};
 
-const tasks = [];
+app.get("/", (req, res) => {
+  res.send({ title: "Books" });
+});
 
 app.get("/tasks", async (req, res) => {
-  const tasks = await Tasks.findAll();
-  res.status(200).send(tasks);
-  return;
-});
-
-app.post("/tasks", async (req, res) => {
-  let data = req.body;
-  const task = await Tasks.create(data);
-  res.status(200).send(data);
-  return;
-});
-
-app.listen({ port: 8080 }, () => {
   try {
-    sequelize.authenticate();
-    console.log("Connection has been established successfully.");
-    sequelize.sync({ alter: true });
-    console.log("Synched");
-  } catch (error) {
-    console.error("Unable to connect to the database:", error);
+    await Task.insertMany([
+      {
+        title: "Task 1",
+        isCompleted: false,
+        tag: "other",
+        date: Date.now(),
+      },
+      {
+        title: "Task 2",
+        isCompleted: false,
+        tag: "other",
+        date: Date.now(),
+      },
+    ]);
+    res.send({ title: "Tasks" });
+  } catch (err) {
+    console.error(err.message);
   }
-  console.log("Server is running on port 8080");
 });
 
-module.exports = app;
+connectDB().then(() => {
+  app.listen(PORT, () => {
+    console.log(`Server running on port ${PORT}`);
+  });
+});
