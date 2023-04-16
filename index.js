@@ -25,7 +25,7 @@ app.get("/", (req, res) => {
 
 app.get("/tasks", async (req, res) => {
   try {
-    await Task.insertMany([
+    const books = await Task.insertMany([
       {
         title: "Task 1",
         isCompleted: false,
@@ -39,7 +39,7 @@ app.get("/tasks", async (req, res) => {
         date: Date.now(),
       },
     ]);
-    res.send({ title: "Tasks" });
+    res.send(books);
   } catch (err) {
     console.error(err.message);
   }
