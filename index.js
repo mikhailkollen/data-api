@@ -20,7 +20,7 @@ const connectDB = async () => {
   }
 };
 
-app.use(express.json()); // This line is necessary to parse JSON data from POST requests
+app.use(express.json());
 
 app.get("/", async (req, res) => {
   try {
