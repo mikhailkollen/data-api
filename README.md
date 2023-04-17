@@ -8,7 +8,7 @@ To use this API, you will need to have access to a web browser or a tool for mak
 
 ### Base URL
 
-The base URL for the API is: `https://todo-api.com`
+The base URL for the API is: `https://tough-bee-bonnet.cyclic.app/`
 
 ### Authentication
 
@@ -18,15 +18,15 @@ Authentication is not currently required for accessing the API.
 
 The API provides the following endpoints:
 
-### `GET /tasks`
+### `GET /`
 
 Returns a list of all tasks in the database.
 
-### `GET /tasks/:id`
+### `GET /:id`
 
 Returns the task with the specified ID.
 
-### `POST /tasks`
+### `POST /`
 
 Creates a new task in the database. The request body must contain a JSON object with the following properties:
 
