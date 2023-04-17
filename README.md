@@ -20,10 +20,6 @@ The API provides the following endpoints:
 
 Returns a list of all tasks in the database.
 
-### `GET /:id`
-
-Returns the task with the specified ID.
-
 ### `POST /`
 
 Creates a new task in the database. The request body must contain a JSON object with the following properties:
@@ -32,7 +28,7 @@ jsonCopy code
 
 `{ "id": 12345, "title": "Task Title", "isCompleted": false, "tag": "health", "date": "2023-04-15T00:00:00.000Z" }`
 
-### `PUT /tasks/:id`
+### `PUT /:id`
 
 Updates the task with the specified ID. The request body must contain a JSON object with the following properties:
 
@@ -40,7 +36,7 @@ jsonCopy code
 
 `{ "id": 12345, "title": "Task Title", "isCompleted": false, "tag": "health", "date": "2023-04-15T00:00:00.000Z" }`
 
-### `DELETE /tasks/:id`
+### `DELETE /:id`
 
 Deletes the task with the specified ID.
 
