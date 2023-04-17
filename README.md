@@ -2,10 +2,6 @@
 
 This is a RESTful API for storing tasks of a to-do app. The API allows users to create, read, update, and delete tasks.
 
-## Getting Started
-
-To use this API, you will need to have access to a web browser or a tool for making HTTP requests. You will also need to have knowledge of HTTP methods (GET, POST, PUT, DELETE) and JSON.
-
 ### Base URL
 
 The base URL for the API is: `https://tough-bee-bonnet.cyclic.app/`
