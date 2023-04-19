@@ -23,7 +23,7 @@ const connectDB = async () => {
 app.use(express.json());
 app.use(
   cors({
-    origin: "http://127.0.0.1:8000/",
+    origin: "*",
   })
 );
 
