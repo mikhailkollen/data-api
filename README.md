@@ -1,8 +1,7 @@
 To-Do App API
 =============
 
-This is a RESTful API created for my personal use only, intended to store tasks of a to-do app. The API allows me to create, read, update, and delete tasks for a single domain only.
-
+This is a RESTful API created for my personal use only, intended to store tasks of a to-do app. The API allows me to create, read, update, and delete tasks.
 ### Base URL
 
 The base URL for the API is: `https://tough-bee-bonnet.cyclic.app/`
@@ -53,8 +52,3 @@ Errors are returned with a status code and a JSON response containing an error m
 -   `400`: Bad Request
 -   `404`: Not Found
 -   `500`: Internal Server Error
-
-Contributing
-------------
-
-This API is created for my personal use only and is not intended to be used by other people. However, it can be used as a reference.
