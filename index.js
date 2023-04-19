@@ -21,7 +21,11 @@ const connectDB = async () => {
 };
 
 app.use(express.json());
-app.use(cors({ origin: "https://mikhailkollen.github.io" }));
+app.use(
+  cors({
+    origin: ["https://mikhailkollen.github.io", "http://127.0.0.1:5500/"],
+  })
+);
 
 app.get("/", async (req, res) => {
   try {
