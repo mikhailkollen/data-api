@@ -21,11 +21,23 @@ const connectDB = async () => {
 };
 
 app.use(express.json());
+
 app.use(
   cors({
-    origin: "https://react-redux-to-do-application.netlify.app/",
+    origin: "https://react-redux-to-do-application.netlify.app",
   })
 );
+
+app.use((req, res, next) => {
+  const origin = req.headers.origin;
+  if (
+    origin === "https://react-redux-to-do-application.netlify.app" ||
+    origin.endsWith(".react-redux-to-do-application.netlify.app")
+  ) {
+    res.setHeader("Access-Control-Allow-Origin", origin);
+  }
+  next();
+});
 
 app.get("/", async (req, res) => {
   try {
