@@ -23,7 +23,7 @@ const connectDB = async () => {
 app.use(express.json());
 app.use(
   cors({
-    origin: "*",
+    origin: "https://react-redux-to-do-application.netlify.app/",
   })
 );
 
